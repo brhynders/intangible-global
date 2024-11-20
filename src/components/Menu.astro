@@ -14,7 +14,7 @@ const subMenuHover = "hover:text-orange-400"
                     </div>
                     <div class="dropdown">
                         <div class="dropdown-content">
-                            {item.children.map(child => <a href={child.url} class={`${child.classes ? child.classes : ''} ${menuItem} ${subMenuHover}`}>{child.name}</a>)}
+                            {item.children.map(child => <a href={child.url} class={`${child.classes ? child.classes : ''} ${menuItem} ${subMenuHover} text-[.85em]`}>{child.name}</a>)}
                         </div>
                     </div>
         </div>;
@@ -26,13 +26,11 @@ const subMenuHover = "hover:text-orange-400"
         @apply pt-[15px] hidden absolute;
     }
     .dropdown-content {
-        @apply p-4 shadow bg-white rounded;
+        @apply px-4 py-3 shadow bg-white rounded flex flex-col gap-0;
         width: max-content;
     }
 
     .has-sub-menu:hover .dropdown {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
+        display: block;
     }
 </style>
