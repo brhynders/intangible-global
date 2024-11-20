@@ -1,0 +1,39 @@
+---
+import { Image } from "astro:assets";
+import Menu from "../components/Menu.astro";
+import logo from "../images/logo.png"
+const menuItems = [
+    {
+        name: 'Home',
+        url: '#'
+    },
+    {
+        name: 'About',
+        url: '#'
+    },
+    {
+        name: 'Services',
+        children: [{
+            name: 'Patent Services',
+            url: '#'
+        }]
+    },
+    {
+        name: 'Why Choose Us',
+        url: '#'
+    },
+    {
+        name: 'Contact Us',
+        url: '#',
+        classes: 'py-3 px-6 bg-orange-400 rounded-full font-medium text-sm text-slate-50',
+        noHover: true
+    }
+];
+---
+
+<header class="py-4 shadow-sm bg-white">
+    <div class="container flex items-center justify-between">
+        <a href="/"><Image src={logo} width="100" alt=""/></a>
+        <Menu  items={menuItems} />
+    </div>
+</header>

@@ -1,0 +1,38 @@
+---
+const {items} = Astro.props;
+const underline = "before:w-0 before:absolute before:bottom-[-1px] before:h-[2px] before:bg-orange-400 before:transition-all hover:before:w-full";
+const menuItem = "py-2 relative transition-all";
+const subMenuHover = "hover:text-orange-400"
+---
+
+<nav class="flex items-center gap-7 font-light text-md">
+    {items.map(item => {
+        if (!item.children) return <a href={item.url} class={`${item.classes ? item.classes : ''} ${menuItem} ${item.noHover ? '' : underline}`}>{item.name}</a>;
+
+        return <div class={`${item.classes ? items.classes : ''} ${menuItem} ${item.noHover ? '' : underline} has-sub-menu cursor-pointer`}>
+                    <div class="flex gap-2 items-center">{item.name} <svg class="w-[.65em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+                    </div>
+                    <div class="dropdown">
+                        <div class="dropdown-content">
+                            {item.children.map(child => <a href={child.url} class={`${child.classes ? child.classes : ''} ${menuItem} ${subMenuHover}`}>{child.name}</a>)}
+                        </div>
+                    </div>
+        </div>;
+    })}
+</nav>
+
+<style>
+    .dropdown {
+        @apply pt-[15px] hidden absolute;
+    }
+    .dropdown-content {
+        @apply p-4 shadow bg-white rounded;
+        width: max-content;
+    }
+
+    .has-sub-menu:hover .dropdown {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+</style>
